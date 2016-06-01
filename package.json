@@ -24,10 +24,11 @@
     "url": "https://github.com/royhobbstn/Point2PlaceAPI/issues"
   },
   "homepage": "https://github.com/royhobbstn/Point2PlaceAPI#readme",
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "dependencies": {
     "body-parser": "^1.15.1",
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "shpjs": "^3.3.2",
+    "turf": "^3.0.5"
   }
 }
