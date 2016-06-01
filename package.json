@@ -1,0 +1,33 @@
+{
+  "name": "point2placeapi",
+  "version": "0.0.1",
+  "description": "convert lat lng to place location name",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/royhobbstn/Point2PlaceAPI.git"
+  },
+  "keywords": [
+    "muni",
+    "place",
+    "lat",
+    "lng",
+    "lookup",
+    "api"
+  ],
+  "author": "Daniel Trone",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/royhobbstn/Point2PlaceAPI/issues"
+  },
+  "homepage": "https://github.com/royhobbstn/Point2PlaceAPI#readme",
+  "devDependencies": {
+  },
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4"
+  }
+}
