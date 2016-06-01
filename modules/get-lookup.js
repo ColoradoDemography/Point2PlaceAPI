@@ -4,33 +4,45 @@ var fs = require("fs");
 
 module.exports = function(req, res, counties, muni_data) {
 
-  console.log(req.query);
+  var lat=parseFloat(req.query.lat);
+  var lng=parseFloat(req.query.lng);
+  
+  if( isNaN(lat) || isNaN(lng) ){ res.send("invalid coordinates"); return; }
 
+  
         var testPoint = {
             'type': 'Feature',
             'geometry': {
                 'type': 'Point',
-                'coordinates': [-104.938498, 39.704263]
-            },
-            'properties': {
-                'name': 'testPoint'
+                'coordinates': [lng, lat]
             }
         };
 
+
+  var muni_result="";
+  var county_result="";
+  
         muni_data.forEach(d => {
-            var isInside = turf.inside(testPoint, d);
+            let isInside = turf.inside(testPoint, d);
             if (isInside === true) {
-                console.log(d.properties.FIRST_CITY);
+              muni_result = d.properties.FIRST_CITY;
             }
         });
 
         counties.forEach(d => {
-            var isInside = turf.inside(testPoint, d);
+            let isInside = turf.inside(testPoint, d);
             if (isInside === true) {
-                console.log(d.properties.NAMELSAD);
+              county_result = d.properties.NAMELSAD;
             }
         });
+  
+  var result_response = {
+    "city": muni_result,
+    "county": county_result
+  };
 
-        res.send("done");
+res.writeHead(200, { 'Content-Type': 'application/json' });   
+res.end(JSON.stringify(result_response));
 
+  
     }
