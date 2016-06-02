@@ -17,27 +17,39 @@ Takes two parameters:
 
 *lng:* longitude
 
+*districts:* boolean value, whether district information should be included in the response
+
 Returns a *Place* Object, which looks like:
 
 ```
 {
   "city": "Central City",
   "county": "Gilpin County",
-  "place_fips": ""
-  "place_lgid": ""
-  "county_fips": ""
-  "county_lgid": ""
+  "place_fips": "",
+  "place_lgid": "",
+  "county_fips": "",
+  "county_lgid": "",
+  "districts: {
+    
+  }
 }
 ```
+
+The "districts" object returns all Special Districts (on File with DOLA) that contain the point.
 
 
 #### POST
 
-Takes one parameters:
-data: an array of coordinate objects (with an optional "uniqueid" field), something like:
+Takes two parameters:
+
+*data:* an array of coordinate objects (with an optional "uniqueid" field), something like:
+
 ```
 [{"uniqueid":9872378,"lat":40,"lng":-105},{"uniqueid":9872379,"lat":40,"lng":-105},{"uniqueid":9872380,"lat":40,"lng":-105},{"uniqueid":9872381,"lat":40,"lng":-105},{"uniqueid":9872382,"lat":40,"lng":-105}]
 ```
+
+*districts:* boolean value, whether district information should be included in the response
+
 
 Returns an Array of *Place* Objects (which will include the optional "uniqueid" field, if it was given)
 
@@ -54,11 +66,20 @@ Example GET request:
 http://red-meteor-147235.nitrousapp.com:4567/lookup?lat=39.8019&lng=-105.513
 
 
-## Path: */refresh-munidata*
+## Path: */refresh-muni-data*
 
 Used to refresh data on the server.
 
 This will download the latest Municipal Boundary File from the Google Storage Bucket to the Server, convert it to a shapefile, and load it into the application memory.
+
+Since the application is always on, and does not query a database - this is needed to periodically update the data in memory with any recent boundary changes.
+
+
+## Path: */refresh-district-data*
+
+Used to refresh data on the server.
+
+This will download the latest Special Districts Boundary File from the Google Storage Bucket to the Server, convert it to a shapefile, and load it into the application memory.
 
 Since the application is always on, and does not query a database - this is needed to periodically update the data in memory with any recent boundary changes.
 

@@ -4,10 +4,12 @@ var fs = require("fs");
 var get_lookup = require('../modules/get-lookup.js');
 var refresh_muni_data = require('../modules/refresh-muni-data.js');
 var refresh_district_data = require('../modules/refresh-district-data.js');
+var refresh_data = require('../modules/refresh-data.js');
 
 var counties = [];
 var muni_data = [];
 var district_data = [];
+
 
 //load muni and county data into memory
 fs.readFile("data/coCountiesTiger2015wgs84.geojson", (err, data) => {
@@ -38,12 +40,13 @@ var appRouter = function(app) {
     });
   
     app.get("/refresh-muni-data", function(req, res) {
-      refresh_muni_data(req, res, counties, muni_data);
+      refresh_data(req, res, muni_data, 'http://storage.googleapis.com/co-publicdata/MuniBounds.zip', 'muni');
     });
   
     app.get("/refresh-district-data", function(req, res) {
-      refresh_district_data(req, res, counties, district_data);
-    });  
+      refresh_data(req, res, district_data, 'http://storage.googleapis.com/co-publicdata/dlall.zip', 'district');
+    });
+  
 }
 
 module.exports = appRouter;
