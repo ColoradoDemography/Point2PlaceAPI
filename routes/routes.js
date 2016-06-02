@@ -2,11 +2,12 @@
 
 var fs = require("fs");
 var get_lookup = require('../modules/get-lookup.js');
-var refresh_munidata = require('../modules/refresh-munidata.js');
+var refresh_muni_data = require('../modules/refresh-muni-data.js');
+var refresh_district_data = require('../modules/refresh-district-data.js');
 
 var counties = [];
 var muni_data = [];
-
+var district_data = [];
 
 //load muni and county data into memory
 fs.readFile("data/coCountiesTiger2015wgs84.geojson", (err, data) => {
@@ -23,17 +24,26 @@ fs.readFile("data/muni-data.geojson", (err, data) => {
 });
 
 
+fs.readFile("data/district-data.geojson", (err, data) => {
+    if (err) throw err;
+    let district_data_set = JSON.parse(data);
+    district_data = district_data_set.features;
+});
+
 
 var appRouter = function(app) {
 
     app.get("/lookup", function(req, res) {
-      get_lookup(req, res, counties, muni_data);
+      get_lookup(req, res, counties, muni_data, district_data);
     });
   
-    app.get("/refresh-munidata", function(req, res) {
-      refresh_munidata(req, res, counties, muni_data);
+    app.get("/refresh-muni-data", function(req, res) {
+      refresh_muni_data(req, res, counties, muni_data);
     });
   
+    app.get("/refresh-district-data", function(req, res) {
+      refresh_district_data(req, res, counties, district_data);
+    });  
 }
 
 module.exports = appRouter;
