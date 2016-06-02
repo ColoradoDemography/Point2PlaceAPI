@@ -11,31 +11,44 @@ Use **POST** for a large volume of data
 
 #### GET
 
-Takes two parameters:
+Takes three parameters:
 
 *lat:* latitude
 
 *lng:* longitude
 
-*districts:* boolean value, whether district information should be included in the response
+*districts:* use districts=true to include district information in the response.  Any other value excludes districts.
 
 Returns a *Place* Object, which looks like:
 
 ```
 {
-  "city": "Central City",
-  "county": "Gilpin County",
-  "place_fips": "",
-  "place_lgid": "",
-  "county_fips": "",
-  "county_lgid": "",
-  "districts: {
-    
-  }
+	"lat": 39.8019,
+	"lng": -105.513,
+	"city": "Central City",
+	"county": "Gilpin County",
+	"place_fips": "12910",
+	"place_lgid": "64263",
+	"county_fips": "047",
+	"county_lgid": "24005",
+	"districts": [
+		{
+			"lgid": "24901",
+			"lgname": "Gilpin County RE-1 School District",
+			"lgtypeid": "99",
+			"type": "School District"
+		},
+		{
+			"lgid": "24002",
+			"lgname": "Black Hawk-Central City Sanitation District",
+			"lgtypeid": "10",
+			"type": "Sanitation District"
+		}
+	]
 }
 ```
 
-The "districts" object returns all Special Districts (on File with DOLA) that contain the point.
+The "districts" array returns an array of District objects, which represent all Special Districts (on File with DOLA) that contain the point.
 
 
 #### POST
@@ -48,7 +61,7 @@ Takes two parameters:
 [{"uniqueid":9872378,"lat":40,"lng":-105},{"uniqueid":9872379,"lat":40,"lng":-105},{"uniqueid":9872380,"lat":40,"lng":-105},{"uniqueid":9872381,"lat":40,"lng":-105},{"uniqueid":9872382,"lat":40,"lng":-105}]
 ```
 
-*districts:* boolean value, whether district information should be included in the response
+*districts:* use districts=true to include district information in the response.  Any other value excludes districts.
 
 
 Returns an Array of *Place* Objects (which will include the optional "uniqueid" field, if it was given)

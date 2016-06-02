@@ -2,8 +2,6 @@
 
 var fs = require("fs");
 var get_lookup = require('../modules/get-lookup.js');
-var refresh_muni_data = require('../modules/refresh-muni-data.js');
-var refresh_district_data = require('../modules/refresh-district-data.js');
 var refresh_data = require('../modules/refresh-data.js');
 
 var counties = [];
@@ -11,7 +9,7 @@ var muni_data = [];
 var district_data = [];
 
 
-//load muni and county data into memory
+//load muni, county and district data into memory
 fs.readFile("data/coCountiesTiger2015wgs84.geojson", (err, data) => {
     if (err) throw err;
     let counties_set = JSON.parse(data);

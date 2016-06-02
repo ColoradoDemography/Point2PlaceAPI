@@ -29,7 +29,7 @@ module.exports = function(req, res, data_set, path, tag){
                         res.send("failure, unable to access " + tag + " data from local file system!");
                     } else {
                         let unparsed_data_set = JSON.parse(data);
-                        data_set = unparsed_data_set.features;
+                        data_set = unparsed_data_set.features; //hmm, is this a copy or a reference?
                         console.log("success!  " + tag + " data is current!");
                         res.send("success!  " + tag + " data is current!");
                     }
