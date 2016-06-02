@@ -28,7 +28,7 @@ module.exports = function(req, res, counties, muni_data, district_data) {
     var place_lgid = "";
     var county_fips = "";
     var county_lgid = "";
-  var districts_arr = [];
+    var districts_arr = [];
 
     muni_data.forEach(d => {
         let isInside = turf.inside(testPoint, d);
@@ -48,23 +48,23 @@ module.exports = function(req, res, counties, muni_data, district_data) {
         }
     });
 
-  if(req.query.districts==="true"){
-    district_data.forEach(d => {
-        let isInside = turf.inside(testPoint, d);
-        if (isInside === true) {
-         if(d.properties.LGSTATUSID === "1"){
-           let tempobj={};
-           tempobj.lgid = d.properties.LGID;
-           tempobj.lgname = d.properties.LGNAME;
-           tempobj.lgtypeid = d.properties.LGTYPEID;
-           tempobj.type = type_description(d.properties.LGTYPEID);
-           districts_arr.push(tempobj);
-         }
-        }
-    });
+    if (req.query.districts === "true") {
+        district_data.forEach(d => {
+            let isInside = turf.inside(testPoint, d);
+            if (isInside === true) {
+                if (d.properties.LGSTATUSID === "1") {
+                    let tempobj = {};
+                    tempobj.lgid = d.properties.LGID;
+                    tempobj.lgname = d.properties.LGNAME;
+                    tempobj.lgtypeid = d.properties.LGTYPEID;
+                    tempobj.type = type_description(d.properties.LGTYPEID);
+                    districts_arr.push(tempobj);
+                }
+            }
+        });
 
-  }
-  
+    }
+
     var result_response = {
         "lat": lat,
         "lng": lng,
@@ -75,10 +75,10 @@ module.exports = function(req, res, counties, muni_data, district_data) {
         "county_fips": county_fips,
         "county_lgid": county_lgid
     };
-  
-  if(req.query.districts==="true"){
-    result_response.districts = districts_arr;
-  }
+
+    if (req.query.districts === "true") {
+        result_response.districts = districts_arr;
+    }
 
     res.writeHead(200, {
         'Content-Type': 'application/json'

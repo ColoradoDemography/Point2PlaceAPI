@@ -2,6 +2,7 @@
 
 var fs = require("fs");
 var get_lookup = require('../modules/get-lookup.js');
+var post_lookup = require('../modules/post-lookup.js');
 var refresh_data = require('../modules/refresh-data.js');
 
 var counties = [];
@@ -34,17 +35,21 @@ fs.readFile("data/district-data.geojson", (err, data) => {
 var appRouter = function(app) {
 
     app.get("/lookup", function(req, res) {
-      get_lookup(req, res, counties, muni_data, district_data);
+        get_lookup(req, res, counties, muni_data, district_data);
     });
-  
+
+    app.post("/lookup", function(req, res) {
+        post_lookup(req, res, counties, muni_data, district_data);
+    });
+
     app.get("/refresh-muni-data", function(req, res) {
-      refresh_data(req, res, muni_data, 'http://storage.googleapis.com/co-publicdata/MuniBounds.zip', 'muni');
+        refresh_data(req, res, muni_data, 'http://storage.googleapis.com/co-publicdata/MuniBounds.zip', 'muni');
     });
-  
+
     app.get("/refresh-district-data", function(req, res) {
-      refresh_data(req, res, district_data, 'http://storage.googleapis.com/co-publicdata/dlall.zip', 'district');
+        refresh_data(req, res, district_data, 'http://storage.googleapis.com/co-publicdata/dlall.zip', 'district');
     });
-  
+
 }
 
 module.exports = appRouter;

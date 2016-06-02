@@ -1,6 +1,6 @@
 {
   "name": "point2placeapi",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "description": "convert lat lng to place location name",
   "main": "app.js",
   "scripts": {
@@ -26,6 +26,7 @@
   "homepage": "https://github.com/royhobbstn/Point2PlaceAPI#readme",
   "devDependencies": {},
   "dependencies": {
+    "body-parser": "^1.15.1",
     "express": "^4.13.4",
     "shpjs": "^3.3.2",
     "turf": "^3.0.5"
