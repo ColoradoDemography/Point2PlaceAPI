@@ -60,7 +60,9 @@ Output
 
 #### POST
 
-Send an JSON object with 2 properties:
+Send a JSON object with 2 properties:
+
+*districts:* use districts="true" to include district information in the response.  Any other value excludes districts.
 
 *data:* an array [ ] of {id, lat, lng} coordinate objects, something like:
 
@@ -68,10 +70,8 @@ Send an JSON object with 2 properties:
 [{"id":"12345","lat":39.612329,"lng":-104.779962},{"id":"12346","lat":39.8019,"lng":-105.513},{"id":"12347","lat":39.755,"lng":-105.222}]
 ```
 
-*districts:* use districts="true" to include district information in the response.  Any other value excludes districts.
+Returns an Array of *Place* Objects
 
-
-Returns an Array of *Place* Objects (which will include the optional "uniqueid" field, if it was given)
 
 Example **POST** Request: 
 
@@ -176,7 +176,7 @@ Output:
                         }
                 ]
         }
-]%
+]
 ```
 
 ----
@@ -205,5 +205,6 @@ This will download the latest Special Districts Boundary File from the Google St
 
 Since the application is always on, and does not query a database - this is needed to periodically update the data in memory with any recent boundary changes.
 
+### Note
 
 County data will not likely need to be updated, as County Boundaries do not change often.  If it is needed, please update the County file with the most current version of the Census TIGER county shapefile for Colorado.

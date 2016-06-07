@@ -10,6 +10,9 @@ module.exports = function(req, res, counties, muni_data, district_data) {
     var latlng_array = req.body.data;
     var districts_flag = req.body.districts;
 
+  console.log('-----');
+  console.log(req.body);
+  
     var output_array = [];
 
     var array_length = latlng_array.length;
