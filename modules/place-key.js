@@ -370,10 +370,10 @@ module.exports = function(placefips) {
         return "02005";
     } //Hooper
     if (placefips === "37545") {
-        return "25015";
+        return "15020";
     } //Hotchkiss
     if (placefips === "37600") {
-        return "15020";
+        return "25015";
     } //Hot Sulphur Springs
     if (placefips === "37820") {
         return "62029";
