@@ -34,11 +34,11 @@ fs.readFile("data/district-data.geojson", (err, data) => {
 
 var appRouter = function(app) {
 
-    app.get("/lookup", function(req, res) {
+    app.get("/place", function(req, res) {
         get_lookup(req, res, counties, muni_data, district_data);
     });
 
-    app.post("/lookup", function(req, res) {
+    app.post("/place", function(req, res) {
         post_lookup(req, res, counties, muni_data, district_data);
     });
 

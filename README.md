@@ -1,7 +1,7 @@
 # Point2PlaceAPI
 NodeJS Microservice to assign a place to a Lat/Lng.
 
-## Path: */lookup*
+## Path: *pt2pl/place*
 
 Used to convert a LatLng to a *Place* Object
 
@@ -23,7 +23,7 @@ Takes three parameters:
 Example **GET** Request:
 
 ```
-http://red-meteor-147235.nitrousapp.com:4567/lookup?lat=39.8019&lng=-105.513&districts=true
+https://gis.dola.colorado.gov/pt2pl/place?lat=39.8019&lng=-105.513&districts=true
 ```
 
 Output
@@ -76,7 +76,7 @@ Returns an Array of *Place* Objects
 Example **POST** Request: 
 
 ```
-curl -H "Content-Type: application/json" -X POST -d '{"data":[{"id":"12345","lat":39.612329,"lng":-104.779962},{"id":"12346","lat":39.8019,"lng":-105.513},{"id":"12347","lat":39.755,"lng":-105.222}],"districts":"true"}' http://red-meteor-147235.nitrousapp.com:4567/lookup
+curl -H "Content-Type: application/json" -X POST -d '{"data":[{"id":"12345","lat":39.612329,"lng":-104.779962},{"id":"12346","lat":39.8019,"lng":-105.513},{"id":"12347","lat":39.755,"lng":-105.222}],"districts":"true"}' https://gis.dola.colorado.gov/pt2pl/place
 ```
 
 Output:
@@ -188,7 +188,7 @@ A blank "city" and "county" field indicates that the point is either not in Colo
 
 
 
-## Path: */refresh-muni-data*
+## Path: *pt2pl/refresh-muni-data*
 
 Used to refresh muni data on the server.
 
@@ -197,7 +197,7 @@ This will download the latest Municipal Boundary File from the Google Storage Bu
 Since the application is always on, and does not query a database - this is needed to periodically update the data in memory with any recent boundary changes.
 
 
-## Path: */refresh-district-data*
+## Path: *pt2pl/refresh-district-data*
 
 Used to refresh district data on the server.
 
