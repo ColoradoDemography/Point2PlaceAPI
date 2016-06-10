@@ -1,3 +1,5 @@
+"use-strict";
+
 var turf = require("turf");
 var fs = require("fs");
 var place_key = require("./place-key.js");
@@ -6,6 +8,7 @@ var type_description = require("./type-description.js");
 
 module.exports = function(req, res, counties, muni_data, district_data) {
 
+  
     var lat = parseFloat(req.query.lat);
     var lng = parseFloat(req.query.lng);
 

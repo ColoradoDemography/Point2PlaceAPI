@@ -1,3 +1,5 @@
+"use-strict";
+
 var turf = require("turf");
 var fs = require("fs");
 var place_key = require("./place-key.js");

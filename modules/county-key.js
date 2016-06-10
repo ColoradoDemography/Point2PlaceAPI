@@ -1,3 +1,5 @@
+"use-strict";
+
 module.exports = function(countyfips) {
 
     if (countyfips === "001") {

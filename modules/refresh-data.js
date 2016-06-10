@@ -1,3 +1,5 @@
+"use-strict";
+
 var shp = require('shpjs');
 var fs = require("fs");
 
