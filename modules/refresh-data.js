@@ -4,7 +4,7 @@ var shp = require('shpjs');
 var fs = require("fs");
 
 
-module.exports = function(req, res, data_set, path, tag) {
+module.exports = function(path, tag, resolve, reject) {
 
     console.log("");
 
@@ -19,7 +19,6 @@ module.exports = function(req, res, data_set, path, tag) {
             if (err) {
                 throw err;
                 console.log("failure, unable to save " + tag + " data to server file system!");
-                res.send("failure, unable to save " + tag + " data to server file system!");
             } else {
                 console.log("saved " + tag + " data to server file system!");
 
@@ -28,12 +27,10 @@ module.exports = function(req, res, data_set, path, tag) {
                     if (err) {
                         throw err;
                         console.log("failure, unable to access " + tag + " data from local file system!");
-                        res.send("failure, unable to access " + tag + " data from local file system!");
                     } else {
                         let unparsed_data_set = JSON.parse(data);
-                        data_set = unparsed_data_set.features; //hmm, is this a copy or a reference?
                         console.log("success!  " + tag + " data is current!");
-                        res.send("success!  " + tag + " data is current!");
+                        resolve(unparsed_data_set.features);
                     }
 
                 });
@@ -45,7 +42,6 @@ module.exports = function(req, res, data_set, path, tag) {
         console.log('error');
         console.log(arguments);
         console.log("failure, unable to load " + tag + " data from google storage!");
-        res.send("failure, unable to load " + tag + " data from google storage!");
     });
 
 }

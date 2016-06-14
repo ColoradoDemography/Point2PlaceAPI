@@ -10,25 +10,12 @@ var muni_data = [];
 var district_data = [];
 
 
+
 //load muni, county and district data into memory
 fs.readFile("data/coCountiesTiger2015wgs84.geojson", (err, data) => {
     if (err) throw err;
     let counties_set = JSON.parse(data);
     counties = counties_set.features;
-});
-
-
-fs.readFile("data/muni-data.geojson", (err, data) => {
-    if (err) throw err;
-    let muni_data_set = JSON.parse(data);
-    muni_data = muni_data_set.features;
-});
-
-
-fs.readFile("data/district-data.geojson", (err, data) => {
-    if (err) throw err;
-    let district_data_set = JSON.parse(data);
-    district_data = district_data_set.features;
 });
 
 
@@ -43,11 +30,34 @@ var appRouter = function(app) {
     });
 
     app.get("/refresh-muni-data", function(req, res) {
-        refresh_data(req, res, muni_data, 'http://storage.googleapis.com/co-publicdata/MuniBounds.zip', 'muni');
+      
+        var promise_muni = new Promise(function(resolve, reject){
+          refresh_data('http://storage.googleapis.com/co-publicdata/MuniBounds.zip', 'muni', resolve, reject);
+        });
+        
+      promise_muni.then(function(value) {
+   muni_data = value;
+        res.send('complete');
+  }, function(reason) {
+  res.send('oops');
+});
+        
+      
     });
 
     app.get("/refresh-district-data", function(req, res) {
-        refresh_data(req, res, district_data, 'http://storage.googleapis.com/co-publicdata/dlall.zip', 'district');
+      
+        var promise_district = new Promise(function(resolve, reject){
+          refresh_data('http://storage.googleapis.com/co-publicdata/dlall.zip', 'district', resolve, reject);
+        });
+        
+      promise_district.then(function(value) {
+   district_data = value;
+        res.send('complete');
+  }, function(reason) {
+  res.send('oops');
+});
+        
     });
 
 }
