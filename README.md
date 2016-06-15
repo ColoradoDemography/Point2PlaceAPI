@@ -1,6 +1,8 @@
 # Point2PlaceAPI
 NodeJS Microservice to assign a place to a Lat/Lng.
 
+- Note: If you are launching an instance of this application, you will need to hit both the *pt2pl/refresh-muni-data* and *pt2pl/refresh-district-data* endpoints before you can use the service.  Will work on automating this setup process in the future.
+
 ## Path: *pt2pl/place*
 
 Used to convert a LatLng to a *Place* Object
